@@ -22,7 +22,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Google Sans", sans-serif;
   color: var(--text);
   background:
     radial-gradient(circle at top left, rgba(246, 196, 79, 0.22), transparent 25%),
@@ -105,7 +105,7 @@ a {
 }
 
 .brand {
-  font-family: "Caveat", cursive;
+  font-family: "Charm", cursive;
   font-size: 2rem;
   line-height: 1;
   color: #223849;
@@ -908,7 +908,7 @@ a {
 
 @media (max-width: 760px) {
   .page-shell {
-    padding-top: 114px;
+    padding-top: 130px;
   }
 
   .container {
