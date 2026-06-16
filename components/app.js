@@ -185,7 +185,7 @@ export const renderApp = (lang) => `
               <h2 class="section-title">${t(siteData.worksSection.title, lang)}</h2>
               <p>${t(siteData.worksSection.subtitle, lang)}</p>
             </div>
-            <a href="#">${t(siteData.worksSection.cta, lang)}</a>
+            <a href="#about-us">${t(siteData.worksSection.cta, lang)}</a>
           </div>
           <div class="work-grid">${renderWorks(siteData.works, lang)}</div>
         </div>

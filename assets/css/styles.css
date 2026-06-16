@@ -613,6 +613,7 @@ a {
   position: relative;
   z-index: 1;
   color: #fff;
+  transition: opacity 220ms ease, transform 220ms ease;
 }
 
 .work-copy h3 {
@@ -630,9 +631,36 @@ a {
   right: -8px;
   bottom: -12px;
   width: 90%;
-  border-radius: 18px 0 0 0;
+  height: auto;
+  border-radius: 18px;
   transform: rotate(-11deg);
   box-shadow: var(--shadow);
+  object-fit: contain;
+  object-position: center;
+  transition:
+    transform 260ms ease,
+    width 260ms ease,
+    height 260ms ease,
+    right 260ms ease,
+    bottom 260ms ease,
+    border-radius 260ms ease;
+}
+
+.work-card:hover .work-copy {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+
+.work-card:hover img {
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  transform: rotate(0deg);
+  object-fit: contain;
+  object-position: center;
 }
 
 .section-subtitle {
