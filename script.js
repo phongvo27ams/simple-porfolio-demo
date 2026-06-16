@@ -1,15 +1,81 @@
 const navLinks = document.querySelectorAll(".main-nav a, .footer-nav a");
+const siteHeader = document.querySelector(".site-header");
+const trackedSections = document.querySelectorAll("main section[id], .site-footer [id]");
+let isManualNavSelection = false;
+let manualNavTimeoutId = null;
 
 navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    navLinks.forEach((item) => item.classList.remove("active"));
+  link.addEventListener("click", (event) => {
     const target = link.getAttribute("href");
+    const targetSection = target ? document.querySelector(target) : null;
+
+    if (targetSection) {
+      event.preventDefault();
+
+      const headerOffset = (siteHeader?.offsetHeight ?? 0) + 18;
+      const targetTop =
+        targetSection.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: Math.max(targetTop, 0),
+        behavior: "smooth",
+      });
+    }
 
     document
       .querySelectorAll(`.main-nav a[href="${target}"], .footer-nav a[href="${target}"]`)
       .forEach((item) => item.classList.add("active"));
+
+    navLinks.forEach((item) => {
+      if (item.getAttribute("href") !== target) {
+        item.classList.remove("active");
+      }
+    });
+
+    isManualNavSelection = true;
+    window.clearTimeout(manualNavTimeoutId);
+    manualNavTimeoutId = window.setTimeout(() => {
+      isManualNavSelection = false;
+      syncActiveNavByScroll();
+    }, 700);
   });
 });
+
+const syncHeaderState = () => {
+  if (!siteHeader) {
+    return;
+  }
+
+  siteHeader.classList.toggle("is-scrolled", window.scrollY > 18);
+};
+
+const setActiveNavLink = (targetId) => {
+  const targetHref = `#${targetId}`;
+
+  navLinks.forEach((link) => {
+    link.classList.toggle("active", link.getAttribute("href") === targetHref);
+  });
+};
+
+const syncActiveNavByScroll = () => {
+  if (isManualNavSelection || !trackedSections.length) {
+    return;
+  }
+
+  const headerOffset = siteHeader?.offsetHeight ?? 0;
+  const triggerLine = headerOffset + 120;
+  let currentSectionId = trackedSections[0].id;
+
+  trackedSections.forEach((section) => {
+    const rect = section.getBoundingClientRect();
+
+    if (rect.top <= triggerLine) {
+      currentSectionId = section.id;
+    }
+  });
+
+  setActiveNavLink(currentSectionId);
+};
 
 const dots = document.querySelectorAll(".slider-dots .dot");
 const testimonialSlider = document.querySelector(".testimonial-slider");
@@ -192,7 +258,11 @@ const syncSliderLayout = () => {
 };
 
 window.addEventListener("resize", syncSliderLayout);
+window.addEventListener("scroll", syncHeaderState, { passive: true });
+window.addEventListener("scroll", syncActiveNavByScroll, { passive: true });
 
+syncHeaderState();
+syncActiveNavByScroll();
 syncSliderLayout();
 setActiveSlide(0);
 startAutoSlide();
