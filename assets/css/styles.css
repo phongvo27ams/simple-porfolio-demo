@@ -123,6 +123,44 @@ a {
   display: none;
 }
 
+.language-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(23, 55, 75, 0.08);
+  border-radius: 999px;
+  padding: 9px 12px;
+  background: #fff;
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(23, 55, 75, 0.06);
+}
+
+.language-toggle .lang-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.language-toggle .flag {
+  width: 18px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(23, 55, 75, 0.12);
+}
+
+.language-toggle .lang-current {
+  color: var(--teal);
+}
+
+.language-toggle .lang-separator {
+  color: #9aa6af;
+}
+
 .mobile-menu[hidden] {
   display: none !important;
 }
@@ -186,6 +224,12 @@ a {
 .mobile-nav {
   display: grid;
   gap: 10px;
+}
+
+.mobile-menu-head {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
 }
 
 .mobile-nav a {
@@ -918,6 +962,10 @@ a {
   .mobile-menu:not([hidden]) {
     top: 92px;
     display: block;
+  }
+
+  .header-contact .language-toggle {
+    display: none;
   }
 
   .hero-copy h1,
