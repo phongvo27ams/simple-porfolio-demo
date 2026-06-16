@@ -1,8 +1,32 @@
+import { renderApp } from "../../components/app.js";
+
+const appRoot = document.querySelector("#app");
+
+if (appRoot) {
+  appRoot.innerHTML = renderApp();
+}
+
 const navLinks = document.querySelectorAll(".main-nav a, .footer-nav a");
 const siteHeader = document.querySelector(".site-header");
 const trackedSections = document.querySelectorAll("main section[id], .site-footer [id]");
+const statNumbers = document.querySelectorAll(".stat-number");
+const dots = document.querySelectorAll(".slider-dots .dot");
+const testimonialSlider = document.querySelector(".testimonial-slider");
+const testimonialTrack = document.querySelector(".testimonial-track");
+const testimonialCards = document.querySelectorAll(".testimonial-card");
+const prevArrow = document.querySelector(".testimonial-arrow.prev");
+const nextArrow = document.querySelector(".testimonial-arrow.next");
+
 let isManualNavSelection = false;
 let manualNavTimeoutId = null;
+let activeSlide = 0;
+let autoSlideId = null;
+let isDragging = false;
+let startX = 0;
+let currentTranslate = 0;
+let previousTranslate = 0;
+let visibleCards = 3;
+let maxSlideIndex = Math.max(0, testimonialCards.length - visibleCards);
 
 navLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
@@ -11,15 +35,9 @@ navLinks.forEach((link) => {
 
     if (targetSection) {
       event.preventDefault();
-
       const headerOffset = (siteHeader?.offsetHeight ?? 0) + 18;
-      const targetTop =
-        targetSection.getBoundingClientRect().top + window.scrollY - headerOffset;
-
-      window.scrollTo({
-        top: Math.max(targetTop, 0),
-        behavior: "smooth",
-      });
+      const targetTop = targetSection.getBoundingClientRect().top + window.scrollY - headerOffset;
+      window.scrollTo({ top: Math.max(targetTop, 0), behavior: "smooth" });
     }
 
     document
@@ -42,16 +60,13 @@ navLinks.forEach((link) => {
 });
 
 const syncHeaderState = () => {
-  if (!siteHeader) {
-    return;
+  if (siteHeader) {
+    siteHeader.classList.toggle("is-scrolled", window.scrollY > 18);
   }
-
-  siteHeader.classList.toggle("is-scrolled", window.scrollY > 18);
 };
 
 const setActiveNavLink = (targetId) => {
   const targetHref = `#${targetId}`;
-
   navLinks.forEach((link) => {
     link.classList.toggle("active", link.getAttribute("href") === targetHref);
   });
@@ -67,9 +82,7 @@ const syncActiveNavByScroll = () => {
   let currentSectionId = trackedSections[0].id;
 
   trackedSections.forEach((section) => {
-    const rect = section.getBoundingClientRect();
-
-    if (rect.top <= triggerLine) {
+    if (section.getBoundingClientRect().top <= triggerLine) {
       currentSectionId = section.id;
     }
   });
@@ -77,42 +90,67 @@ const syncActiveNavByScroll = () => {
   setActiveNavLink(currentSectionId);
 };
 
-const dots = document.querySelectorAll(".slider-dots .dot");
-const testimonialSlider = document.querySelector(".testimonial-slider");
-const testimonialTrack = document.querySelector(".testimonial-track");
-const testimonialCards = document.querySelectorAll(".testimonial-card");
-const prevArrow = document.querySelector(".testimonial-arrow.prev");
-const nextArrow = document.querySelector(".testimonial-arrow.next");
-let activeSlide = 0;
-let autoSlideId = null;
-let isDragging = false;
-let startX = 0;
-let currentTranslate = 0;
-let previousTranslate = 0;
-let visibleCards = 3;
-let maxSlideIndex = Math.max(0, testimonialCards.length - visibleCards);
+const animateStatNumber = (element) => {
+  const target = Number.parseInt(element.dataset.target || "0", 10);
+  if (!target || element.dataset.animating === "true") {
+    return;
+  }
+
+  element.dataset.animating = "true";
+  const duration = 1400;
+  const startTime = performance.now();
+  const suffix = target >= 100 ? "+" : "";
+
+  const step = (currentTime) => {
+    const progress = Math.min((currentTime - startTime) / duration, 1);
+    const eased = 1 - (1 - progress) * (1 - progress);
+    element.textContent = `${Math.round(target * eased)}${suffix}`;
+
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+      return;
+    }
+
+    element.textContent = `${target}${suffix}`;
+    element.dataset.animating = "false";
+  };
+
+  window.requestAnimationFrame(step);
+};
+
+if (statNumbers.length) {
+  const statsObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateStatNumber(entry.target);
+          return;
+        }
+
+        if (entry.target.dataset.animating === "true") {
+          return;
+        }
+
+        const target = Number.parseInt(entry.target.dataset.target || "0", 10);
+        const suffix = target >= 100 ? "+" : "";
+        entry.target.textContent = `0${suffix}`;
+      });
+    },
+    { threshold: 0.45 }
+  );
+
+  statNumbers.forEach((stat) => statsObserver.observe(stat));
+}
 
 const getVisibleCards = () => {
-  if (window.innerWidth <= 760) {
-    return 1;
-  }
-
-  if (window.innerWidth <= 1100) {
-    return 2;
-  }
-
+  if (window.innerWidth <= 760) return 1;
+  if (window.innerWidth <= 1100) return 2;
   return 3;
 };
 
 const clampSlideIndex = (index) => {
-  if (index < 0) {
-    return maxSlideIndex;
-  }
-
-  if (index > maxSlideIndex) {
-    return 0;
-  }
-
+  if (index < 0) return maxSlideIndex;
+  if (index > maxSlideIndex) return 0;
   return index;
 };
 
@@ -131,7 +169,7 @@ const updateTrackPosition = (translateValue) => {
 };
 
 const getStepSize = () => {
-  if (!testimonialCards.length) {
+  if (!testimonialCards.length || !testimonialTrack) {
     return 0;
   }
 
@@ -149,6 +187,21 @@ const setActiveSlide = (index) => {
   updateTrackPosition(currentTranslate);
 };
 
+const startAutoSlide = () => {
+  if (!testimonialSlider || maxSlideIndex < 1) {
+    return;
+  }
+
+  window.clearInterval(autoSlideId);
+  autoSlideId = window.setInterval(() => {
+    setActiveSlide(activeSlide + 1);
+  }, 3000);
+};
+
+const stopAutoSlide = () => {
+  window.clearInterval(autoSlideId);
+};
+
 const goToPrevSlide = () => {
   setActiveSlide(activeSlide - 1);
   startAutoSlide();
@@ -159,21 +212,6 @@ const goToNextSlide = () => {
   startAutoSlide();
 };
 
-const startAutoSlide = () => {
-  if (!testimonialSlider || maxSlideIndex < 1) {
-    return;
-  }
-
-  clearInterval(autoSlideId);
-  autoSlideId = window.setInterval(() => {
-    goToNextSlide();
-  }, 3000);
-};
-
-const stopAutoSlide = () => {
-  clearInterval(autoSlideId);
-};
-
 dots.forEach((dot, index) => {
   dot.addEventListener("click", () => {
     setActiveSlide(index);
@@ -181,13 +219,8 @@ dots.forEach((dot, index) => {
   });
 });
 
-prevArrow?.addEventListener("click", () => {
-  goToPrevSlide();
-});
-
-nextArrow?.addEventListener("click", () => {
-  goToNextSlide();
-});
+prevArrow?.addEventListener("click", goToPrevSlide);
+nextArrow?.addEventListener("click", goToNextSlide);
 
 if (testimonialSlider && testimonialTrack) {
   const pointerDown = (event) => {
@@ -205,8 +238,7 @@ if (testimonialSlider && testimonialTrack) {
     }
 
     event.preventDefault();
-    const deltaX = event.clientX - startX;
-    currentTranslate = previousTranslate + deltaX;
+    currentTranslate = previousTranslate + (event.clientX - startX);
     updateTrackPosition(currentTranslate);
   };
 
@@ -239,6 +271,7 @@ if (testimonialSlider && testimonialTrack) {
   testimonialSlider.addEventListener("pointercancel", pointerUp);
   testimonialSlider.addEventListener("mouseleave", () => {
     if (!isDragging) {
+      startAutoSlide();
       return;
     }
 
@@ -248,7 +281,6 @@ if (testimonialSlider && testimonialTrack) {
     startAutoSlide();
   });
   testimonialSlider.addEventListener("mouseenter", stopAutoSlide);
-  testimonialSlider.addEventListener("mouseleave", startAutoSlide);
 }
 
 const syncSliderLayout = () => {
