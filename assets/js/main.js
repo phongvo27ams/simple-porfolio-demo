@@ -7,7 +7,10 @@ if (appRoot) {
 }
 
 const navLinks = document.querySelectorAll(".main-nav a, .footer-nav a");
+const allNavLinks = document.querySelectorAll(".main-nav a, .footer-nav a, .mobile-nav a");
 const siteHeader = document.querySelector(".site-header");
+const menuToggle = document.querySelector(".menu-toggle");
+const mobileMenu = document.querySelector(".mobile-menu");
 const trackedSections = document.querySelectorAll("main section[id], .site-footer [id]");
 const statNumbers = document.querySelectorAll(".stat-number");
 const dots = document.querySelectorAll(".slider-dots .dot");
@@ -28,7 +31,35 @@ let previousTranslate = 0;
 let visibleCards = 3;
 let maxSlideIndex = Math.max(0, testimonialCards.length - visibleCards);
 
-navLinks.forEach((link) => {
+const closeMobileMenu = () => {
+  if (!mobileMenu || !menuToggle) {
+    return;
+  }
+
+  mobileMenu.hidden = true;
+  document.body.classList.remove("menu-open");
+  menuToggle.setAttribute("aria-expanded", "false");
+};
+
+const openMobileMenu = () => {
+  if (!mobileMenu || !menuToggle) {
+    return;
+  }
+
+  mobileMenu.hidden = false;
+  document.body.classList.add("menu-open");
+  menuToggle.setAttribute("aria-expanded", "true");
+};
+
+menuToggle?.addEventListener("click", () => {
+  if (mobileMenu?.hidden) {
+    openMobileMenu();
+  } else {
+    closeMobileMenu();
+  }
+});
+
+allNavLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
     const target = link.getAttribute("href");
     const targetSection = target ? document.querySelector(target) : null;
@@ -41,14 +72,16 @@ navLinks.forEach((link) => {
     }
 
     document
-      .querySelectorAll(`.main-nav a[href="${target}"], .footer-nav a[href="${target}"]`)
+      .querySelectorAll(`.main-nav a[href="${target}"], .footer-nav a[href="${target}"], .mobile-nav a[href="${target}"]`)
       .forEach((item) => item.classList.add("active"));
 
-    navLinks.forEach((item) => {
+    allNavLinks.forEach((item) => {
       if (item.getAttribute("href") !== target) {
         item.classList.remove("active");
       }
     });
+
+    closeMobileMenu();
 
     isManualNavSelection = true;
     window.clearTimeout(manualNavTimeoutId);
@@ -67,7 +100,7 @@ const syncHeaderState = () => {
 
 const setActiveNavLink = (targetId) => {
   const targetHref = `#${targetId}`;
-  navLinks.forEach((link) => {
+  allNavLinks.forEach((link) => {
     link.classList.toggle("active", link.getAttribute("href") === targetHref);
   });
 };
@@ -292,6 +325,11 @@ const syncSliderLayout = () => {
 window.addEventListener("resize", syncSliderLayout);
 window.addEventListener("scroll", syncHeaderState, { passive: true });
 window.addEventListener("scroll", syncActiveNavByScroll, { passive: true });
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 760) {
+    closeMobileMenu();
+  }
+});
 
 syncHeaderState();
 syncActiveNavByScroll();

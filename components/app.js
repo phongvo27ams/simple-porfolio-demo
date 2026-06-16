@@ -84,12 +84,21 @@ export const renderApp = () => `
   <div class="page-shell">
     <header class="site-header container">
       <a class="brand" href="#">Binjan</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        <span>Menu</span>
+      </button>
       <nav class="main-nav" aria-label="Primary">${renderNavLinks(siteData.navItems, "#home")}</nav>
       <div class="header-contact">
         <a class="phone-link" href="tel:+001313345678">+001 (313) 345 678</a>
         <button class="icon-button" type="button" aria-label="Call"><span>&#9742;</span></button>
       </div>
     </header>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <nav class="mobile-nav container" aria-label="Mobile Primary">
+        ${renderNavLinks(siteData.navItems, "#home")}
+      </nav>
+    </div>
     <main>
       <section class="hero container" id="home">
         <div class="hero-copy">
