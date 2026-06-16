@@ -1,9 +1,9 @@
 export const defaultLanguage = "vi";
 
 export const siteData = {
-  brand: "Mỹ Tiên",
+  brand: "Viktorija",
   phone: "+84 3522 27111",
-  email: "pn.vothimytien@gmail.com",
+  email: "viktorija@example.com",
   navItems: [
     { href: "#home", label: { vi: "Trang chủ", en: "Home" } },
     { href: "#skills", label: { vi: "Kỹ năng", en: "My Skills" } },
@@ -27,26 +27,26 @@ export const siteData = {
     },
   },
   hero: {
-    title: { vi: "Xin chào,\nTôi là Mỹ Tiên", en: "Hey There,\nI am Mỹ Tiên" },
+    title: { vi: "Xin chào,\nTôi là Viktorija", en: "Hey There,\nI am Viktorija" },
     yearsLabel: { vi: "Năm\nKinh nghiệm", en: "Years\nExperience" },
     intro: {
-      vi: "Tôi thiết kế những trải nghiệm đơn giản nhưng đẹp mắt, và tôi yêu công việc mình làm.",
-      en: "I design beautifully simple things, and I love what I do.",
+      vi: "Tôi thiết kế những trải nghiệm số đơn giản, tinh tế và giàu tính thẩm mỹ. Mỗi sản phẩm tôi tạo ra đều hướng đến sự cân bằng giữa công năng và vẻ đẹp, bởi tôi thực sự yêu những gì mình làm.",
+      en: "I design digital experiences that are simple, elegant, and visually engaging. Every product I create strives to achieve the perfect balance between functionality and aesthetics, driven by a genuine passion for what I do.",
     },
     certificateLabel: {
-      vi: "Chuyên gia được chứng nhận\nUI/UX Designer",
-      en: "Certified Professional\nUI/UX Designer",
+      vi: "Chứng nhận \n Chuyên gia \n UI/UX Designer",
+      en: "Certified Professional \n UI/UX Designer",
     },
   },
   servicesSection: {
     title: { vi: "Tôi giúp gì cho bạn?", en: "What do I help?" },
     description1: {
-      vi: "Tôi sẽ giúp bạn tìm ra giải pháp và xử lý vấn đề. Chúng tôi sử dụng quy trình thiết kế để tạo ra các sản phẩm số và đồng thời hỗ trợ tốt hơn cho hoạt động kinh doanh.",
-      en: "I will help you find solutions and solve problems. We use design processes to create digital products while also helping businesses grow more effectively.",
+      vi: "Tôi mang đến những giải pháp thiết kế giúp sản phẩm của bạn trở nên trực quan, hiệu quả và hấp dẫn hơn. Từ nghiên cứu người dùng, thiết kế giao diện đến xây dựng trải nghiệm số, tôi tập trung vào việc tạo ra những sản phẩm vừa đẹp mắt vừa đáp ứng mục tiêu kinh doanh.",
+      en: "I provide design solutions that make your products more intuitive, effective, and engaging. From user research and interface design to crafting seamless digital experiences, I focus on creating products that are both visually appealing and aligned with business goals.",
     },
     description2: {
-      vi: "Chúng tôi sử dụng quy trình thiết kế để tạo ra các sản phẩm số, đồng thời giúp doanh nghiệp phát triển hiệu quả hơn.",
-      en: "We use design processes to create digital products and support businesses with clearer, more effective digital experiences.",
+      vi: "Tôi giúp biến ý tưởng thành những trải nghiệm số đơn giản, hiện đại và dễ sử dụng.",
+      en: "I help turn ideas into simple, modern, and user-friendly digital experiences.",
     },
   },
   services: [
@@ -207,7 +207,7 @@ export const siteData = {
     startBy: { vi: "Bắt đầu bằng cách", en: "Start by" },
     sayHi: { vi: "nói xin chào", en: "saying hi" },
     information: { vi: "Thông tin", en: "Information" },
-    address: { vi: "237 Nguyễn Hữu Cảnh, Phường Rạch Dừa, TP. Hồ Chí Minh", en: "237 Nguyen Huu Canh St., Rach Dua Ward, Ho Chi Minh City" },
+    address: { vi: "237 Sunny Springs, Breezy Valley, NA", en: "237 Sunny Springs, Breezy Valley, NA" },
     rights: { vi: "©2026. Bảo lưu mọi quyền", en: "©2026. All Rights Reserved" },
     designBy: { vi: "Thiết kế bởi Võ Thị Mỹ Tiên", en: "Design by Võ Thị Mỹ Tiên" },
   },
