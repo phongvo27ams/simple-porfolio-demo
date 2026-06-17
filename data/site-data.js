@@ -1,4 +1,4 @@
-export const defaultLanguage = "vi";
+export const defaultLanguage = "en";
 
 export const siteData = {
   brand: "Viktorija",
@@ -6,10 +6,11 @@ export const siteData = {
   email: "viktorija@example.com",
   navItems: [
     { href: "#home", label: { vi: "Trang chủ", en: "Home" } },
-    { href: "#skills", label: { vi: "Kỹ năng", en: "My Skills" } },
+    { href: "#about", label: { vi: "Giới thiệu", en: "About" } },
+    { href: "#skills", label: { vi: "Kỹ năng", en: "Skills" } },
     { href: "#experience", label: { vi: "Kinh nghiệm", en: "Experience" } },
     { href: "#works", label: { vi: "Dự án", en: "Works" } },
-    { href: "#about-us", label: { vi: "Đánh giá", en: "About us" } },
+    { href: "#reviews", label: { vi: "Đánh giá", en: "Reviews" } },
     { href: "#contact", label: { vi: "Liên hệ", en: "Contact" } },
   ],
   ui: {
@@ -30,23 +31,67 @@ export const siteData = {
     title: { vi: "Xin chào,\nTôi là Viktorija", en: "Hey There,\nI am Viktorija" },
     yearsLabel: { vi: "Năm\nKinh nghiệm", en: "Years\nExperience" },
     intro: {
-      vi: "Tôi thiết kế những trải nghiệm số đơn giản, tinh tế và giàu tính thẩm mỹ. Mỗi sản phẩm tôi tạo ra đều hướng đến sự cân bằng giữa công năng và vẻ đẹp, bởi tôi thực sự yêu những gì mình làm.",
-      en: "I design digital experiences that are simple, elegant, and visually engaging. Every product I create strives to achieve the perfect balance between functionality and aesthetics, driven by a genuine passion for what I do.",
+      vi: "Tôi thiết kế những trải nghiệm số đơn giản, tinh tế và giàu tính thẩm mỹ. Mỗi sản phẩm tôi tạo ra đều hướng đến sự cân bằng giữa công năng và vẻ đẹp.",
+      en: "I design digital experiences that are simple, elegant, and visually engaging. Every product I create strives to balance functionality with aesthetics.",
     },
     certificateLabel: {
-      vi: "Chứng nhận \n Chuyên gia \n UI/UX Designer",
-      en: "Certified Professional \n UI/UX Designer",
+      vi: "Chứng nhận\nChuyên gia\nUI/UX Designer",
+      en: "Certified\nProfessional\nUI/UX Designer",
     },
+  },
+  aboutSection: {
+    eyebrow: { vi: "Hồ sơ cá nhân", en: "Profile Snapshot" },
+    title: { vi: "Tôi xây dựng trải nghiệm số có chiều sâu và dễ sử dụng.", en: "I build digital experiences that feel refined and easy to use." },
+    description: {
+      vi: "Portfolio này được phát triển như một không gian trình bày năng lực thiết kế và triển khai front-end, tập trung vào tư duy thẩm mỹ, tính hệ thống và khả năng chuyển ý tưởng thành giao diện có thể sử dụng thực tế. Tôi quan tâm đặc biệt đến việc tổ chức thông tin rõ ràng, tạo điểm nhấn thị giác hợp lý và đảm bảo trải nghiệm nhất quán trên nhiều kích thước màn hình.",
+      en: "This portfolio was developed as a space to present both design thinking and front-end implementation skills, with a focus on visual clarity, structure, and turning ideas into usable interfaces. I care deeply about organizing content clearly, creating meaningful visual emphasis, and maintaining a consistent experience across screen sizes.",
+    },
+    points: [
+      {
+        icon: "fa-solid fa-compass-drafting",
+        title: { vi: "Định hướng thiết kế", en: "Design Direction" },
+        text: {
+          vi: "Ưu tiên bố cục có nhịp điệu, typography rõ ràng và cách dùng màu sắc đủ tinh tế để tạo bản sắc cá nhân.",
+          en: "Focused on rhythm in layout, clear typography, and color decisions that build a recognizable personal identity.",
+        },
+      },
+      {
+        icon: "fa-solid fa-layer-group",
+        title: { vi: "Tư duy hệ thống", en: "System Thinking" },
+        text: {
+          vi: "Luôn tổ chức giao diện theo component, dữ liệu theo cấu trúc và hành vi theo từng nhóm chức năng cụ thể.",
+          en: "Interfaces are organized by component, content by structured data, and behavior by clear functional groups.",
+        },
+      },
+      {
+        icon: "fa-solid fa-bolt",
+        title: { vi: "Triển khai linh hoạt", en: "Flexible Delivery" },
+        text: {
+          vi: "Có khả năng biến bản thiết kế tĩnh thành giao diện động, responsive và có tính tương tác tốt trên cả desktop lẫn mobile.",
+          en: "Able to turn static designs into responsive, interactive interfaces that work well on both desktop and mobile.",
+        },
+      },
+    ],
+    highlights: [
+      {
+        label: { vi: "Trọng tâm chuyên môn", en: "Core Focus" },
+        value: { vi: "UI/UX, Front-end, Responsive Design", en: "UI/UX, Front-end, Responsive Design" },
+      },
+      {
+        label: { vi: "Định hướng công việc", en: "Preferred Work" },
+        value: { vi: "Landing page, dashboard, product website", en: "Landing pages, dashboards, product websites" },
+      },
+    ],
   },
   servicesSection: {
     title: { vi: "Tôi giúp gì cho bạn?", en: "What do I help?" },
     description1: {
-      vi: "Tôi mang đến những giải pháp thiết kế giúp sản phẩm của bạn trở nên trực quan, hiệu quả và hấp dẫn hơn. Từ nghiên cứu người dùng, thiết kế giao diện đến xây dựng trải nghiệm số, tôi tập trung vào việc tạo ra những sản phẩm vừa đẹp mắt vừa đáp ứng mục tiêu kinh doanh.",
-      en: "I provide design solutions that make your products more intuitive, effective, and engaging. From user research and interface design to crafting seamless digital experiences, I focus on creating products that are both visually appealing and aligned with business goals.",
+      vi: "Tôi mang đến những giải pháp thiết kế giúp sản phẩm trở nên trực quan, thuyết phục và dễ sử dụng hơn. Từ nghiên cứu giao diện, tinh chỉnh bố cục đến triển khai trải nghiệm số, tôi tập trung vào việc làm cho mỗi điểm chạm trên website đều có mục đích rõ ràng.",
+      en: "I create design solutions that make products more intuitive, persuasive, and easier to use. From interface research and layout refinement to digital execution, I focus on making every touchpoint on the website feel intentional.",
     },
     description2: {
-      vi: "Tôi giúp biến ý tưởng thành những trải nghiệm số đơn giản, hiện đại và dễ sử dụng.",
-      en: "I help turn ideas into simple, modern, and user-friendly digital experiences.",
+      vi: "Mục tiêu của tôi không chỉ là làm cho giao diện đẹp hơn, mà còn là giúp nội dung, cấu trúc và tương tác phục vụ tốt hơn cho mục tiêu kinh doanh và trải nghiệm người dùng.",
+      en: "My goal is not only to make interfaces look better, but also to ensure that content, structure, and interaction support both business goals and user experience more effectively.",
     },
   },
   services: [
@@ -73,41 +118,100 @@ export const siteData = {
     { target: 285, label: { vi: "Dự án hoàn thành", en: "Project Completed" } },
     { target: 190, label: { vi: "Khách hàng hài lòng", en: "Happy Clients" } },
   ],
+  toolkitSection: {
+    eyebrow: { vi: "Bộ kỹ năng", en: "Toolkit" },
+    title: { vi: "Các công cụ và năng lực tôi sử dụng để biến ý tưởng thành sản phẩm.", en: "The tools and capabilities I use to turn ideas into products." },
+    cards: [
+      {
+        icon: "fa-solid fa-code",
+        title: { vi: "Front-end", en: "Front-end" },
+        text: { vi: "HTML, CSS, JavaScript, responsive layout, animation và tối ưu UI theo component.", en: "HTML, CSS, JavaScript, responsive layout, animation, and component-based UI implementation." },
+      },
+      {
+        icon: "fa-solid fa-pen-ruler",
+        title: { vi: "Thiết kế giao diện", en: "Interface Design" },
+        text: { vi: "Wireframe, visual hierarchy, layout systems, prototype và tinh chỉnh thẩm mỹ số.", en: "Wireframes, visual hierarchy, layout systems, prototypes, and digital visual refinement." },
+      },
+      {
+        icon: "fa-solid fa-diagram-project",
+        title: { vi: "Quy trình sản phẩm", en: "Product Flow" },
+        text: { vi: "Tổ chức cấu trúc thông tin, hành trình người dùng và ưu tiên các điểm chạm quan trọng.", en: "Information architecture, user journeys, and prioritizing the product’s most critical touchpoints." },
+      },
+    ],
+    tags: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "Responsive UI",
+      "Figma",
+      "Accessibility",
+      "Interaction Design",
+      "Git",
+      "Content Structuring",
+      "Motion Principles",
+    ],
+  },
   experienceSection: {
     title: { vi: "Kinh nghiệm làm việc", en: "My Work Experience" },
   },
   experience: [
     {
-      company: { vi: "Công ty Brisbane", en: "Brisbane Co.,Ltd." },
-      period: { vi: "09/2016 - 12/2020", en: "Sep 2026 - Dec 2022" },
+      company: { vi: "Brisbane Co.,Ltd.", en: "Brisbane Co.,Ltd." },
+      period: { vi: "09/2016 - 12/2020", en: "Sep 2016 - Dec 2020" },
       role: { vi: "Nhà thiết kế hình ảnh", en: "Visual Designer" },
       tone: "teal",
       description: {
-        vi: "Thiết kế các ý tưởng cho nhiều nền tảng khác nhau, bao gồm trang web, trò chơi, phim ảnh, ki-ốt và các sản phẩm đeo được.",
-        en: "A visual designer creates concepts for a range of platforms, including websites, games, films, kiosks, and wearable products.",
+        vi: "Thiết kế ý tưởng thị giác cho nhiều nền tảng khác nhau, từ website doanh nghiệp đến hệ thống truyền thông số, với trọng tâm là tính nhất quán về hình ảnh và nhận diện.",
+        en: "Created visual concepts across multiple digital platforms, from corporate websites to communication systems, with a focus on visual consistency and brand identity.",
       },
     },
     {
-      company: { vi: "Công ty New Man Services", en: "New Man Services JSC" },
+      company: { vi: "New Man Services JSC", en: "New Man Services JSC" },
       period: { vi: "01/2021 - 03/2023", en: "Jan 2021 - Mar 2023" },
       role: { vi: "Nhà thiết kế UI/UX", en: "UI/UX Designer" },
       tone: "orange",
       description: {
-        vi: "Thiết kế UI/UX tập trung vào việc xây dựng giao diện cho phần mềm và thiết bị sao cho rõ ràng, hiệu quả và dễ sử dụng.",
-        en: "UI/UX design focuses on building interfaces for software and devices that are clear, efficient, and easy to use.",
+        vi: "Phụ trách thiết kế giao diện và cải thiện trải nghiệm người dùng cho các sản phẩm số, phối hợp cùng đội ngũ phát triển để tối ưu tính dễ dùng và mức độ hoàn thiện của sản phẩm.",
+        en: "Led interface design and UX improvements for digital products, collaborating closely with developers to improve usability and product polish.",
       },
     },
     {
-      company: { vi: "Tập đoàn Global Solutions", en: "Global Solutions Inc." },
-      period: { vi: "04/2023 - 06/2026", en: "Apr 2019 - Jun 2026" },
+      company: { vi: "Global Solutions Inc.", en: "Global Solutions Inc." },
+      period: { vi: "04/2023 - 06/2026", en: "Apr 2023 - Jun 2026" },
       role: { vi: "Nhà thiết kế sản phẩm cấp cao", en: "Sr. Product Designer" },
       tone: "yellow",
       description: {
-        vi: "Xây dựng trải nghiệm trực quan cho sản phẩm, tối ưu cách trình bày, khả năng sử dụng và hiệu quả chuyển đổi thông qua hình ảnh, nội dung và cấu trúc tương tác rõ ràng.",
-        en: "Built product experiences with a focus on usability, visual clarity, and stronger conversion through thoughtful interaction design.",
+        vi: "Xây dựng trải nghiệm sản phẩm ở mức hệ thống, tối ưu cách trình bày nội dung, luồng thao tác và cấu trúc tương tác để tăng tính rõ ràng và hiệu quả sử dụng.",
+        en: "Built product experiences at a systems level, refining content presentation, task flow, and interaction structure to improve clarity and usability.",
       },
     },
   ],
+  processSection: {
+    eyebrow: { vi: "Quy trình làm việc", en: "How I Work" },
+    title: { vi: "Mỗi dự án được triển khai theo một quy trình rõ ràng, giúp giảm sai lệch và tăng chất lượng đầu ra.", en: "Each project follows a clear process that reduces ambiguity and improves the quality of delivery." },
+    steps: [
+      {
+        icon: "fa-solid fa-magnifying-glass-chart",
+        title: { vi: "Khảo sát & xác định vấn đề", en: "Research & Problem Framing" },
+        text: { vi: "Phân tích mục tiêu, người dùng và bối cảnh sử dụng để xác định hướng giải quyết phù hợp.", en: "I analyze goals, users, and context to define the right direction before moving into design." },
+      },
+      {
+        icon: "fa-solid fa-object-group",
+        title: { vi: "Thiết kế cấu trúc & giao diện", en: "Structure & Interface Design" },
+        text: { vi: "Xây dựng bố cục, phân cấp nội dung và hệ thống thị giác giúp sản phẩm dễ hiểu và dễ dùng.", en: "Layouts, content hierarchy, and visual systems are shaped to make the product easier to understand and use." },
+      },
+      {
+        icon: "fa-solid fa-laptop-file",
+        title: { vi: "Triển khai & tinh chỉnh", en: "Implementation & Refinement" },
+        text: { vi: "Chuyển thiết kế thành giao diện thật, kiểm tra responsive và tinh chỉnh chuyển động, khoảng cách, typography.", en: "I translate design into real UI, check responsiveness, and refine motion, spacing, and typography." },
+      },
+      {
+        icon: "fa-solid fa-chart-line",
+        title: { vi: "Đánh giá & cải tiến", en: "Review & Improvement" },
+        text: { vi: "Đo lường tính hiệu quả của giao diện và điều chỉnh để nâng chất lượng trải nghiệm cuối cùng.", en: "The interface is reviewed for effectiveness and adjusted to strengthen the final user experience." },
+      },
+    ],
+  },
   worksSection: {
     title: { vi: "Các dự án nổi bật", en: "My Latest Works" },
     subtitle: { vi: "Giải pháp hoàn hảo cho trải nghiệm số", en: "Perfect solution for digital experience" },
@@ -136,6 +240,39 @@ export const siteData = {
       alt: { vi: "Xem trước dự án thương hiệu", en: "Branding project preview" },
     },
   ],
+  caseStudySection: {
+    eyebrow: { vi: "Chi tiết dự án", en: "Case Snapshots" },
+    title: { vi: "Mỗi dự án đều được xây dựng từ một mục tiêu rõ ràng, không chỉ là một lớp giao diện đẹp mắt.", en: "Every project is built around a clear objective, not just a polished visual layer." },
+    items: [
+      {
+        icon: "fa-solid fa-burger",
+        title: { vi: "Food Delivery App", en: "Food Delivery App" },
+        meta: { vi: "UI Design • Mobile Experience", en: "UI Design • Mobile Experience" },
+        text: {
+          vi: "Tập trung vào việc làm rõ hành trình đặt món, hiển thị sản phẩm bắt mắt và rút ngắn số bước thao tác để tăng khả năng hoàn tất đơn hàng.",
+          en: "Focused on clarifying the ordering flow, presenting food visually, and reducing friction to improve order completion.",
+        },
+      },
+      {
+        icon: "fa-solid fa-globe",
+        title: { vi: "Agency Website", en: "Agency Website" },
+        meta: { vi: "Landing Page • Brand Storytelling", en: "Landing Page • Brand Storytelling" },
+        text: {
+          vi: "Nhấn mạnh sự tin cậy thương hiệu, năng lực dịch vụ và khả năng điều hướng nội dung mạch lạc cho người xem lần đầu truy cập.",
+          en: "Designed to strengthen brand trust, highlight service capability, and guide first-time visitors through content clearly.",
+        },
+      },
+      {
+        icon: "fa-solid fa-swatchbook",
+        title: { vi: "Brand Identity", en: "Brand Identity" },
+        meta: { vi: "Visual System • Consistency", en: "Visual System • Consistency" },
+        text: {
+          vi: "Xây dựng hệ thống thị giác có tính nhận diện cao, từ màu sắc, typography đến cách trình bày tài sản thương hiệu trên nhiều điểm chạm.",
+          en: "Built a recognizable visual system across color, typography, and the presentation of brand assets on different touchpoints.",
+        },
+      },
+    ],
+  },
   testimonialsSection: {
     title: { vi: "Mọi người nói về tôi", en: "People talk about me" },
     subtitle: {
@@ -147,7 +284,7 @@ export const siteData = {
     {
       image: "https://placehold.co/70x70/f0c45d/17374b?text=A",
       quote: {
-        vi: '"Một quá trình hợp tác rất chỉnh chu. Kết quả cuối cùng vượt kỳ vọng và mọi thứ được triển khai một cách mạch lạc."',
+        vi: '"Một quá trình hợp tác rất chỉn chu. Kết quả cuối cùng vượt kỳ vọng và mọi thứ được triển khai một cách mạch lạc."',
         en: '"A highly professional collaboration. The final result exceeded expectations and everything was delivered in a clear, structured way."',
       },
       name: "Anamika Sandula",
@@ -199,6 +336,27 @@ export const siteData = {
       role: { vi: "Trưởng marketing", en: "Marketing Lead" },
     },
   ],
+  contactSection: {
+    eyebrow: { vi: "Kết nối", en: "Let’s Connect" },
+    title: { vi: "Nếu bạn đang cần một giao diện chỉn chu, có hệ thống và phù hợp với người dùng, tôi sẵn sàng đồng hành.", en: "If you need an interface that feels polished, structured, and genuinely user-focused, I’d be glad to work with you." },
+    cards: [
+      {
+        icon: "fa-solid fa-envelope-open-text",
+        title: { vi: "Email làm việc", en: "Work Email" },
+        value: "viktorija@example.com",
+      },
+      {
+        icon: "fa-solid fa-phone-volume",
+        title: { vi: "Số điện thoại", en: "Phone Number" },
+        value: "+84 3522 27111",
+      },
+      {
+        icon: "fa-solid fa-location-dot",
+        title: { vi: "Khu vực làm việc", en: "Working Region" },
+        value: { vi: "Việt Nam • Làm việc từ xa", en: "Vietnam • Remote Friendly" },
+      },
+    ],
+  },
   footer: {
     title: {
       vi: "Hãy cùng nhau tạo nên điều gì đó thật ấn tượng.",
@@ -207,8 +365,8 @@ export const siteData = {
     startBy: { vi: "Bắt đầu bằng cách", en: "Start by" },
     sayHi: { vi: "nói xin chào", en: "saying hi" },
     information: { vi: "Thông tin", en: "Information" },
-    address: { vi: "237 Sunny Springs, Breezy Valley, NA", en: "237 Sunny Springs, Breezy Valley, NA" },
-    rights: { vi: "©2026. Bảo lưu mọi quyền", en: "©2026. All Rights Reserved" },
+    address: { vi: "237 Sunny Springs St., Breezy Valley, VN", en: "237 Sunny Springs St., Breezy Valley, VN" },
+    rights: { vi: "&copy; 2026. Bảo lưu mọi quyền", en: "&copy; 2026. All Rights Reserved" },
     designBy: { vi: "Thiết kế bởi Võ Thị Mỹ Tiên", en: "Design by Võ Thị Mỹ Tiên" },
   },
 };

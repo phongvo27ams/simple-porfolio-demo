@@ -99,12 +99,106 @@ const renderWorks = (works, lang) =>
 const renderTestimonials = (items, lang) =>
   items
     .map(
-      (item) => `
-        <article class="testimonial-card">
-          <img src="${item.image}" alt="Avatar placeholder" />
+      (item, index) => `
+        <article class="testimonial-card testimonial-card-${(index % 6) + 1}">
+          <div class="testimonial-avatar" aria-hidden="true">${item.name.charAt(0).toUpperCase()}</div>
           <p>${t(item.quote, lang)}</p>
           <h3>${item.name}</h3>
           <span>${t(item.role, lang)}</span>
+        </article>
+      `
+    )
+    .join("");
+
+const renderAboutPoints = (items, lang) =>
+  items
+    .map(
+      (item) => `
+        <article class="about-point">
+          <div class="about-point-icon"><i class="${item.icon}" aria-hidden="true"></i></div>
+          <div>
+            <h3>${t(item.title, lang)}</h3>
+            <p>${t(item.text, lang)}</p>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+
+const renderHighlights = (items, lang) =>
+  items
+    .map(
+      (item) => `
+        <div class="highlight-item">
+          <span>${t(item.label, lang)}</span>
+          <strong>${t(item.value, lang)}</strong>
+        </div>
+      `
+    )
+    .join("");
+
+const renderToolkitCards = (items, lang) =>
+  items
+    .map(
+      (item) => `
+        <article class="toolkit-card">
+          <div class="toolkit-icon"><i class="${item.icon}" aria-hidden="true"></i></div>
+          <h3>${t(item.title, lang)}</h3>
+          <p>${t(item.text, lang)}</p>
+        </article>
+      `
+    )
+    .join("");
+
+const renderToolkitTags = (items) => {
+  const tagItems = items.map((item) => `<span class="toolkit-tag">${item}</span>`).join("");
+
+  return `
+    <div class="toolkit-marquee" aria-label="Skills marquee">
+      <div class="toolkit-marquee-track">
+        <div class="toolkit-marquee-group">${tagItems}</div>
+        <div class="toolkit-marquee-group" aria-hidden="true">${tagItems}</div>
+      </div>
+    </div>
+  `;
+};
+
+const renderProcessSteps = (items, lang) =>
+  items
+    .map(
+      (item, index) => `
+        <article class="process-card">
+          <div class="process-index">0${index + 1}</div>
+          <div class="process-icon"><i class="${item.icon}" aria-hidden="true"></i></div>
+          <h3>${t(item.title, lang)}</h3>
+          <p>${t(item.text, lang)}</p>
+        </article>
+      `
+    )
+    .join("");
+
+const renderCaseStudyItems = (items, lang) =>
+  items
+    .map(
+      (item) => `
+        <article class="case-card">
+          <div class="case-icon"><i class="${item.icon}" aria-hidden="true"></i></div>
+          <span class="case-meta">${t(item.meta, lang)}</span>
+          <h3>${t(item.title, lang)}</h3>
+          <p>${t(item.text, lang)}</p>
+        </article>
+      `
+    )
+    .join("");
+
+const renderContactCards = (items, lang) =>
+  items
+    .map(
+      (item) => `
+        <article class="contact-card">
+          <div class="contact-card-icon"><i class="${item.icon}" aria-hidden="true"></i></div>
+          <span>${t(item.title, lang)}</span>
+          <strong>${t(item.value, lang)}</strong>
         </article>
       `
     )
@@ -161,6 +255,19 @@ export const renderApp = (lang) => `
           </div>
         </div>
       </section>
+
+      <section class="about section-block" id="about">
+        <div class="container about-grid">
+          <div class="about-copy">
+            <span class="section-eyebrow">${t(siteData.aboutSection.eyebrow, lang)}</span>
+            <h2 class="section-title">${t(siteData.aboutSection.title, lang)}</h2>
+            <p>${t(siteData.aboutSection.description, lang)}</p>
+            <div class="highlight-grid">${renderHighlights(siteData.aboutSection.highlights, lang)}</div>
+          </div>
+          <div class="about-points">${renderAboutPoints(siteData.aboutSection.points, lang)}</div>
+        </div>
+      </section>
+
       <section class="services section-block" id="skills">
         <div class="container services-grid">
           <div class="service-list">${renderServiceCards(siteData.services, lang)}</div>
@@ -172,12 +279,31 @@ export const renderApp = (lang) => `
           </div>
         </div>
       </section>
+
+      <section class="toolkit section-block plain-tinted">
+        <div class="container">
+          <span class="section-eyebrow centered">${t(siteData.toolkitSection.eyebrow, lang)}</span>
+          <h2 class="section-title centered toolkit-title">${t(siteData.toolkitSection.title, lang)}</h2>
+          <div class="toolkit-grid">${renderToolkitCards(siteData.toolkitSection.cards, lang)}</div>
+          <div class="toolkit-tags">${renderToolkitTags(siteData.toolkitSection.tags)}</div>
+        </div>
+      </section>
+
       <section class="experience section-block plain-tinted" id="experience">
         <div class="container">
           <h2 class="section-title centered">${t(siteData.experienceSection.title, lang)}</h2>
           <div class="timeline">${renderTimeline(siteData.experience, lang)}</div>
         </div>
       </section>
+
+      <section class="process section-block">
+        <div class="container">
+          <span class="section-eyebrow centered">${t(siteData.processSection.eyebrow, lang)}</span>
+          <h2 class="section-title centered process-title">${t(siteData.processSection.title, lang)}</h2>
+          <div class="process-grid">${renderProcessSteps(siteData.processSection.steps, lang)}</div>
+        </div>
+      </section>
+
       <section class="works section-block" id="works">
         <div class="container">
           <div class="section-head">
@@ -185,12 +311,21 @@ export const renderApp = (lang) => `
               <h2 class="section-title">${t(siteData.worksSection.title, lang)}</h2>
               <p>${t(siteData.worksSection.subtitle, lang)}</p>
             </div>
-            <a href="#about-us">${t(siteData.worksSection.cta, lang)}</a>
+            <a href="#reviews">${t(siteData.worksSection.cta, lang)}</a>
           </div>
           <div class="work-grid">${renderWorks(siteData.works, lang)}</div>
         </div>
       </section>
-      <section class="testimonials section-block plain-tinted" id="about-us">
+
+      <section class="case-studies section-block">
+        <div class="container">
+          <span class="section-eyebrow centered">${t(siteData.caseStudySection.eyebrow, lang)}</span>
+          <h2 class="section-title centered case-title">${t(siteData.caseStudySection.title, lang)}</h2>
+          <div class="case-grid">${renderCaseStudyItems(siteData.caseStudySection.items, lang)}</div>
+        </div>
+      </section>
+
+      <section class="testimonials section-block plain-tinted" id="reviews">
         <div class="container">
           <h2 class="section-title centered">${t(siteData.testimonialsSection.title, lang)}</h2>
           <p class="section-subtitle centered narrow">${t(siteData.testimonialsSection.subtitle, lang)}</p>
@@ -215,12 +350,22 @@ export const renderApp = (lang) => `
           </div>
         </div>
       </section>
+
+      <section class="contact-band section-block">
+        <div class="container contact-band-grid">
+          <div class="contact-band-copy">
+            <span class="section-eyebrow">${t(siteData.contactSection.eyebrow, lang)}</span>
+            <h2 class="section-title">${t(siteData.contactSection.title, lang)}</h2>
+          </div>
+          <div class="contact-card-grid">${renderContactCards(siteData.contactSection.cards, lang)}</div>
+        </div>
+      </section>
     </main>
     <footer class="site-footer section-block">
       <div class="container footer-grid">
         <div class="footer-cta">
           <h2>${t(siteData.footer.title, lang)}</h2>
-          <p>${t(siteData.footer.startBy, lang)} <a href="mailto:hello@example.com">${t(
+          <p>${t(siteData.footer.startBy, lang)} <a href="mailto:${siteData.email}">${t(
             siteData.footer.sayHi,
             lang
           )}</a></p>
