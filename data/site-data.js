@@ -367,6 +367,6 @@ export const siteData = {
     information: { vi: "Thông tin", en: "Information" },
     address: { vi: "237 Sunny Springs St., Breezy Valley, VN", en: "237 Sunny Springs St., Breezy Valley, VN" },
     rights: { vi: "&copy; 2026. Bảo lưu mọi quyền", en: "&copy; 2026. All Rights Reserved" },
-    designBy: { vi: "Thiết kế bởi Võ Thị Mỹ Tiên", en: "Design by Võ Thị Mỹ Tiên" },
+    designBy: { vi: "Thiết kế bởi Võ Thị Mỹ Tiên", en: "Designed by Võ Thị Mỹ Tiên" },
   },
 };
